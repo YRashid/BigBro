@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface MonitoringRepository extends CrudRepository<Monitoring, Long> {
     List<Monitoring> findByIsActive(Boolean isActive);
+    List<Monitoring> findByUserId(Long userId);
 }

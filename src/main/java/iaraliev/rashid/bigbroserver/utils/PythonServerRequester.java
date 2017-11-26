@@ -1,6 +1,7 @@
 package iaraliev.rashid.bigbroserver.utils;
 
 import iaraliev.rashid.bigbroserver.model.domain.Car;
+import iaraliev.rashid.bigbroserver.model.domain.Model;
 import iaraliev.rashid.bigbroserver.model.domain.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ public class PythonServerRequester {
     private static final String JPEG = ".jpeg";
     private static final String URL_GET_CARS = "http://localhost:5000/?path=";
     private static final String URL_THEFT = "http://localhost:5001/?path1=%s&path2=%s&top=%s&left=%s&bottom=%s&right=%s";
+    private static final String URL_CAR_MODEL = "http://localhost:5002/?path=%s&top=%s&left=%s&bottom=%s&right=%s";
 
     @Value("${image.folder}")
     private String imageFolder;
@@ -57,6 +59,21 @@ public class PythonServerRequester {
         } catch (Exception e) {
             logger.error("Error: ", e);
         }
+        return result;
+    }
+
+    public String getModel(long cameraId, long imgNumberFirst, long top, long left, long bottom, long right) {
+        String firstPath = imageFolder + cameraId + "_" + imgNumberFirst + JPEG;
+        String fullUrl = String.format(URL_CAR_MODEL, firstPath, top, left, bottom, right);
+
+        String result = "Go to good porsche shop ...";
+/* TODO: FIX
+try {
+            ResponseEntity<Model> response = restTemplate.exchange(fullUrl, HttpMethod.GET, null, Model.class);
+            result = String.format("Go to good %s shop ...", response.getBody().getModel());
+        } catch (Exception e) {
+            logger.error("Error: ", e);
+        }*/
         return result;
     }
 }

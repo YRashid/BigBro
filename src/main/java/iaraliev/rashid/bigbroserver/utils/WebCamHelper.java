@@ -34,6 +34,7 @@ public class WebCamHelper {
     public WebCamHelper(CameraRepository cameraRepository) {
         this.cameraRepository = cameraRepository;
         registerWebCams();
+        System.out.println("#Started");
     }
 
     public void savePicture(long cameraId, long imgCount) throws IOException {

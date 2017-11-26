@@ -69,11 +69,11 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.3.6</version>
 		</dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>org.sonatype.sisu.inject</groupId>
             <artifactId>guice-plexus</artifactId>
             <version>1.4.2</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>com.madgag</groupId>

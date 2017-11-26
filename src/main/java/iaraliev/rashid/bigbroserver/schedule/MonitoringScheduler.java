@@ -39,7 +39,7 @@ public class MonitoringScheduler {
         this.cameraRepository = cameraRepository;
     }
 
-    @Scheduled(initialDelay = 3000, fixedDelay = 3000)
+    @Scheduled(initialDelay = 3000, fixedDelay = 1500)
     public void doMonitoring() throws IOException {
 
         List<Monitoring> monitorings = monitoringRepository.findByIsActive(true);
@@ -50,15 +50,16 @@ public class MonitoringScheduler {
 
             boolean isHereTheft = requester.isHereTheft(cameraId, lastImageNum, lastImageNum - 1, monitoring.getTop(), monitoring.getLeft(), monitoring.getBottom(), monitoring.getRight());
 
-            /*TODO: FIX
-            if(!monitoring.getHereTheft() && isHereTheft){
-                monitoring.setHereTheft(true);
-                            monitoringRepository.save(monitoring);
-            }*/
-
             if (isHereTheft) {
+                monitoring.setHereTheft(true);
+                monitoringRepository.save(monitoring);
                 generateGif(cameraId, lastImageNum, monitoring.getId());
+
             }
+
+/*            if (isHereTheft) {
+                generateGif(cameraId, lastImageNum + 1, monitoring.getId());
+            }*/
 
             System.out.println("isHereTheft: " + isHereTheft + " cameraId: " + cameraId + " img1: " + lastImageNum + " img2: " + (lastImageNum - 1));
         }
@@ -69,14 +70,15 @@ public class MonitoringScheduler {
         AnimatedGifEncoder encoder = new AnimatedGifEncoder();
 
         encoder.start(new FileOutputStream(new File(imageFolder + monitoringId + ".gif")));
-        encoder.setRepeat(3);
+        encoder.setRepeat(9);
         encoder.setDelay(400);
 
 
         for (int i = 0; i < MAX_PICTURE_COUNT; i++) {
             try {
-                String path = imageFolder + cameraId + "_" + lastImageNumber + ".jpeg";
+                String path = imageFolder + cameraId + "_" + (lastImageNumber - i) + ".jpeg";
                 encoder.addFrame(getImage(path));
+                System.out.println("GIF: " + i);
             } catch (IOException unimportant) {
                 break;
             }
