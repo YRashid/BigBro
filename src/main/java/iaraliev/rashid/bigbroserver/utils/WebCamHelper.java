@@ -40,8 +40,13 @@ public class WebCamHelper {
         Webcam webcam = Webcam.getWebcamByName(String.valueOf(cameraId));
         webcam.open();
 
+
         BufferedImage image = webcam.getImage();
-        ImageIO.write(image, "jpeg", new File(imageFolder + cameraId + "_" + imgCount + ".jpeg"));
+        try {
+            ImageIO.write(image, "jpeg", new File(imageFolder + cameraId + "_" + imgCount + ".jpeg"));
+        } catch (Exception e) {
+            logger.error("Error: {}", e);
+        }
         webcam.close();
     }
 

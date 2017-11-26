@@ -39,7 +39,7 @@ public class MonitoringScheduler {
         this.cameraRepository = cameraRepository;
     }
 
-    @Scheduled(initialDelay = 4000, fixedDelay = 3000)
+    @Scheduled(initialDelay = 3000, fixedDelay = 3000)
     public void doMonitoring() throws IOException {
 
         List<Monitoring> monitorings = monitoringRepository.findByIsActive(true);
@@ -53,12 +53,14 @@ public class MonitoringScheduler {
             /*TODO: FIX
             if(!monitoring.getHereTheft() && isHereTheft){
                 monitoring.setHereTheft(true);
+                            monitoringRepository.save(monitoring);
             }*/
-            monitoring.setHereTheft(isHereTheft);
-            System.out.println("isHereTheft: " + isHereTheft);
 
+            if (isHereTheft) {
+                generateGif(cameraId, lastImageNum, monitoring.getId());
+            }
 
-            // взять предпоследнюю картинку и сравнить с последней
+            System.out.println("isHereTheft: " + isHereTheft + " cameraId: " + cameraId + " img1: " + lastImageNum + " img2: " + (lastImageNum - 1));
         }
     }
 

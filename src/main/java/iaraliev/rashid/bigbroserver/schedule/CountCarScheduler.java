@@ -26,7 +26,7 @@ public class CountCarScheduler {
         this.requester = requester;
     }
 
-    @Scheduled(initialDelay = 9000, fixedDelay = 15000)
+    @Scheduled(initialDelay = 5000, fixedDelay = 15000)
     private void countCar() {
         for (Camera camera : cameraRepository.findAll()) {
             Long cameraId = camera.getId();

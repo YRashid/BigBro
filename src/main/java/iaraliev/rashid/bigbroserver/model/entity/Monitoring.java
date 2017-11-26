@@ -19,8 +19,8 @@ public class Monitoring {
     @JoinColumn(name = "camera_id")
     private Camera camera;
     private Date crateDate = new Date();
-    private Boolean isActive;
-    private Boolean isHereTheft;
+    private Boolean isActive = true;
+    private Boolean isHereTheft = false;
 
     public Boolean getHereTheft() {
         return isHereTheft;
