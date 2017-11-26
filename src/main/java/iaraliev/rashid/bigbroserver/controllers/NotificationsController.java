@@ -1,7 +1,6 @@
 package iaraliev.rashid.bigbroserver.controllers;
 
-import iaraliev.rashid.bigbroserver.repository.CameraRepository;
-import iaraliev.rashid.bigbroserver.utils.PythonServerRequester;
+import iaraliev.rashid.bigbroserver.model.domain.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,26 +14,25 @@ public class NotificationsController {
     private volatile boolean doIt = false;
 
     @Autowired
-    public NotificationsController(CameraRepository cameraRepository, PythonServerRequester pythonServerRequester) {
-        this.cameraRepository = cameraRepository;
+    public NotificationsController() {
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public
     @ResponseBody
-    String getNotification() {
-        String result = null;
+    Status getNotification() {
+        Status status = new Status();
         if (doIt) {
-            result = "Take your car away because there will be snow cleaning";
+            status.setStatus("Take your car away because there will be snow cleaning");
             doIt = false;
         }
-        return result;
+        return status;
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public
     @ResponseBody
-    Boolean addNotifiaction() {
+    Boolean addNotification() {
         doIt = true;
         return doIt;
     }

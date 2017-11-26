@@ -67,13 +67,12 @@ public class PythonServerRequester {
         String fullUrl = String.format(URL_CAR_MODEL, firstPath, top, left, bottom, right);
 
         String result = "Go to good porsche shop ...";
-/* TODO: FIX
-try {
+        try {
             ResponseEntity<Model> response = restTemplate.exchange(fullUrl, HttpMethod.GET, null, Model.class);
             result = String.format("Go to good %s shop ...", response.getBody().getModel());
         } catch (Exception e) {
             logger.error("Error: ", e);
-        }*/
+        }
         return result;
     }
 }
