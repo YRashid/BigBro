@@ -38,9 +38,13 @@ We were able to achieve reliable and fast cars recognition on the live video foo
 ## What's next for BigBro
 Improve the car recognition feature to detect car brand. That will allow us to show our users the most relevant advertisements possible.
 Use bigger amount of open datasets to improve quality of user experience.
-Built With: 
+
+#### Built With: 
+
 [Mobile app](https://github.com/mgamzatov/bigbro): kotlin
+
 [Backend](https://github.com/YRashid/BigBro): java
+
 [Data Analysis](https://github.com/alex27594/bigbro): python, tensorflow, keras, opencv, yolo, open-data
 
 [More information](https://devpost.com/software/bigbro-p7msk4)
